@@ -4,31 +4,37 @@ const ProductService = require('../services/product.service');
 const router = express.Router();
 const service = new ProductService();
 
-router.get('/', (req, res) => {
-  const products = service.find();
-  res.send(products);
+router.get('/', async (req, res) => {
+  try {
+    const products = await service.find();
+    res.send(products);
+  } catch (error) {
+    res.status(500).json({
+      "message": error
+    })
+  }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const product = service.findOne(id);
+  const product = await service.findOne(id);
   res.send(product);
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const body = req.body;
-  res.status(201).send(service.create(body));
+  res.status(201).send(await service.create(body));
 })
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
   const id = req.params.id;
   const body = req.body;
-  res.send(service.update(id, body));
+  res.send(await service.update(id, body));
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const id = req.params.id;
-  res.json(service.delete(id));
+  res.json(await service.delete(id));
 })
 
 module.exports = router;

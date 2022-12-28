@@ -19,7 +19,7 @@ class ProductService{
     }
   }
 
-  create(data){
+  async create(data){
     const newProduct = {
       id: faker.datatype.uuid(),
       ...data
@@ -28,17 +28,17 @@ class ProductService{
     return newProduct;
   }
 
-  find(){
+  async find(){
     return this.products;
   }
 
-  findOne(id){
+  async findOne(id){
     return this.products.find((producto) =>{
       return producto.id = id;
     })
   }
 
-  update(id, data){
+  async update(id, data){
     const index = this.products.findIndex((producto) =>{
       return producto.id == id;
     });
@@ -55,7 +55,7 @@ class ProductService{
     return this.products[index];
   }
 
-  delete(id){
+  async delete(id){
     const index = this.products.findIndex((producto) =>{
       return producto.id = id;
     });
