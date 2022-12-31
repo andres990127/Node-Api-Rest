@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const routerApi = require('./routes');
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
+const routerApi = require('../routes');
+const { logErrors, errorHandler, boomErrorHandler } = require('../middlewares/error.handler');
 
 dotenv.config();
 
